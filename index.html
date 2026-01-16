@@ -877,51 +877,51 @@
                     </div>
                 </div>
 
-                <!-- Inquiry Form (Ye code form ka hai)
-                <form class="contact-form" id="inquiryForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" required placeholder="Enter full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" required placeholder="+91 XXXXX XXXXX">
-                        </div>
-                    </div>
+                <!-- Inquiry Form (Ye code form ka hai)-->
+               <form class="contact-form" id="inquiryForm" action="https://formspree.io/f/mbddlvja" method="POST">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" name="name" id="name" required placeholder="Enter full name">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" name="phone" id="phone" required placeholder="+91 XXXXX XXXXX">
+        </div>
+    </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" required placeholder="name@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="eventType">Event Type</label>
-                            <select id="eventType" required>
-                                <option value="" disabled selected>Select Event</option>
-                                <option value="wedding">Wedding</option>
-                                <option value="pre-wedding">Pre-Wedding</option>
-                                <option value="engagement">Engagement</option>
-                                <option value="event">Corporate/Other Event</option>
-                            </select>
-                        </div>
-                    </div> 
+    <div class="form-row">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" required placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+            <label for="eventType">Event Type</label>
+            <select name="eventType" id="eventType" required>
+                <option value="" disabled selected>Select Event</option>
+                <option value="wedding">Wedding</option>
+                <option value="pre-wedding">Pre-Wedding</option>
+                <option value="engagement">Engagement</option>
+                <option value="event">Corporate/Other Event</option>
+            </select>
+        </div>
+    </div> 
 
-                    <div class="form-group">
-                        <label for="date">Event Date</label>
-                        <input type="date" id="date">
-                    </div>
+    <div class="form-group">
+        <label for="date">Event Date</label>
+        <input type="date" name="date" id="date">
+    </div>
 
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" rows="4" placeholder="Tell us about your story and requirements..."></textarea>
-                    </div>
+    <div class="form-group">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="4" placeholder="Tell us about your story and requirements..."></textarea>
+    </div>
 
-                    <button type="submit" class="btn" style="width: 100%;">Send Enquiry</button>
-                </form>
+    <button type="submit" class="btn" style="width: 100%;">Send Enquiry</button>
+</form>
             </div>
         </div>
-    </section>-->
+    </section>
 
     <!-- Footer (Sabse neeche wala hissa) -->
     <footer>
@@ -1005,33 +1005,56 @@
             revealObserver.observe(el);
         });
 
-        // --- 4. Form Handling (Ye nakli form submission hai) ---
-        const form = document.getElementById('inquiryForm');
-        const messageToast = document.getElementById('form-message');
+        // --- 4. Real Form Handling via Formspree ---
+const form = document.getElementById('inquiryForm');
+const messageToast = document.getElementById('form-message');
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const submitBtn = form.querySelector('button');
-            const originalText = submitBtn.innerText;
-            
-            submitBtn.innerText = "Sending...";
-            submitBtn.style.opacity = "0.7";
+form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Stop the page from refreshing
+    
+    const submitBtn = form.querySelector('button');
+    const originalText = submitBtn.innerText;
+    
+    submitBtn.innerText = "Sending...";
+    submitBtn.disabled = true;
 
-            setTimeout(() => {
-                messageToast.classList.add('show');
-                
-                form.reset();
-                submitBtn.innerText = originalText;
-                submitBtn.style.opacity = "1";
+    // Get the form data
+    const formData = new FormData(form);
 
-                setTimeout(() => {
-                    messageToast.classList.remove('show');
-                }, 4000);
-            }, 1500);
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
         });
+
+        if (response.ok) {
+            // Show Success Message
+            messageToast.innerText = "Enquiry Sent Successfully! We will call you soon.";
+            messageToast.classList.add('show');
+            form.reset();
+        } else {
+            messageToast.innerText = "Oops! Something went wrong. Please try again.";
+            messageToast.classList.add('show');
+        }
+    } catch (error) {
+        messageToast.innerText = "Error connecting to server.";
+        messageToast.classList.add('show');
+    } finally {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        
+        // Hide the toast after 4 seconds
+        setTimeout(() => {
+            messageToast.classList.remove('show');
+        }, 4000);
+    }
+});
 
     </script>
 </body>
 
 </html>
+
