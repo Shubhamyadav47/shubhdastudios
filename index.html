@@ -646,6 +646,25 @@
     /* This inverts the colors (White becomes Black) */
     filter: invert(100%) hue-rotate(180deg);
 }
+        iframe {
+    width: 100%; /* Take full width of container */
+    max-width: 640px; /* But don't get bigger than 640px */
+    height: 1325px; /* Keep height or adjust as needed */
+    border: none;
+    /* The filter is a clever hack for dark mode, but check if it makes photos inside the form look weird! */
+    filter: invert(100%) hue-rotate(180deg); 
+    display: block;
+    margin: 0 auto; /* Centers the form */
+}
+        html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Adds space so the title isn't hidden behind the header */
+}
+        /* Center the form iframe container */
+#contact iframe {
+    max-width: 100%; /* Ensures it doesn't overflow on mobile */
+    border-radius: 8px; /* Smooth corners */
+}
 
     </style>
 </head>
@@ -681,9 +700,9 @@
     <section id="hero">
         <!-- CHANGE THIS: Background Images -->
         <!-- Neeche 3 lines mein images hain. 'url('...')' ke andar apna photo ka link dalein -->
-        <div class="hero-bg active" style="background-image: url('media/R6II3283.webp');"></div>
-        <div class="hero-bg" style="background-image: url('media/w.webp');"></div>
-        <div class="hero-bg" style="background-image: url('media/R6II3632.webp');"></div>       
+        <div class="hero-bg active" style="background-image: url('media/R6II3283.webp');" loading="lazy"></div>
+        <div class="hero-bg" style="background-image: url('media/w.webp');" loading="lazy"></div>
+        <div class="hero-bg" style="background-image: url('media/R6II3632.webp');" loading="lazy"></div>       
         
         <div class="overlay"></div>
         
@@ -724,7 +743,7 @@
                 </div>
                 <div class="about-img">
                     <!-- CHANGE THIS: About Image. 'src' ke andar naya link dalein -->
-                    <img src="media/DSC_9291.webp" alt="Wedding Photographer">
+                    <img src="media/DSC_9291.webp" alt="Wedding Photographer" loading="lazy">
                 </div>
             </div>
 
@@ -766,7 +785,7 @@
                 <!-- PHOTO ITEM 1 -->
                 <div class="portfolio-item">
                     <!-- CHANGE THIS: Image Link badlein 'src' mein -->
-                    <img src="media/IMG_9452.webp" alt="Traditional Indian Wedding Photography in Narnaul Haryana">
+                    <img src="media/IMG_9452.webp" alt="Traditional Indian Wedding Photography in Narnaul Haryana" loading="lazy">
                     <div class="portfolio-overlay">
                         <!-- CHANGE THIS: Photo ka Title aur Description -->
                         <h3>The Royal Vows</h3>
@@ -777,7 +796,7 @@
                 <!-- PHOTO ITEM 2 -->
                 <div class="portfolio-item">
                     <!-- CHANGE THIS: Image Link badlein -->
-                    <img src="media/IMG_7785.webp" alt="Pre Wedding Shoot in Narnaul Haryana">
+                    <img src="media/IMG_7785.webp" alt="Pre Wedding Shoot in Narnaul Haryana" loading="lazy">
                     <div class="portfolio-overlay">
                         <!-- CHANGE THIS: Title -->
                         <h3>Sunset & Love</h3>
@@ -788,7 +807,7 @@
                 <!-- PHOTO ITEM 3 -->
                 <div class="portfolio-item">
                     <!-- CHANGE THIS: Image Link badlein -->
-                    <img src="media/IMG_1084.webp" alt="Bride Portrait Wedding Photography Narnaul">
+                    <img src="media/IMG_1084.webp" alt="Bride Portrait Wedding Photography Narnaul" loading="lazy">
                     <div class="portfolio-overlay">
                         <!-- CHANGE THIS: Title -->
                         <h3>Bridal Elegance</h3>
@@ -799,7 +818,7 @@
                 <!-- PHOTO ITEM 4 -->
                 <div class="portfolio-item">
                     <!-- CHANGE THIS: Image Link badlein -->
-                    <img src="media/IMG_1086.webp" alt="Haldi Ceremony Photography in Narnaul">
+                    <img src="media/IMG_1086.webp" alt="Haldi Ceremony Photography in Narnaul" loading="lazy">
                     <div class="portfolio-overlay">
                         <!-- CHANGE THIS: Title -->
                         <h3>Colors of Haldi</h3>
@@ -810,7 +829,7 @@
                 <!-- PHOTO ITEM 5 -->
                 <div class="portfolio-item">
                     <!-- CHANGE THIS: Image Link badlein -->
-                    <img src="media/IMG_5307.webp" alt="Couple Pose">
+                    <img src="media/IMG_5307.webp" alt="Couple Pose" loading="lazy">
                     <div class="portfolio-overlay">
                         <!-- CHANGE THIS: Title -->
                         <h3>Eternal Bond</h3>
@@ -821,7 +840,7 @@
                 <!-- PHOTO ITEM 6 -->
                 <div class="portfolio-item">
                     <!-- CHANGE THIS: Image Link badlein -->
-                    <img src="media/IMG_6470.webp" alt="Jewelry Detail">
+                    <img src="media/IMG_6470.webp" alt="Jewelry Detail" loading="lazy">
                     <div class="portfolio-overlay">
                         <!-- CHANGE THIS: Title -->
                         <h3>Details Matter</h3>
@@ -968,6 +987,7 @@
 </body>
 
 </html>
+
 
 
 
