@@ -642,6 +642,10 @@
         #form-message.show {
             transform: translateY(0);
         }
+        iframe {
+    /* This inverts the colors (White becomes Black) */
+    filter: invert(100%) hue-rotate(180deg);
+}
 
     </style>
 </head>
@@ -1006,34 +1010,12 @@
             revealObserver.observe(el);
         });
 
-        // --- 4. Form Handling (Ye nakli form submission hai) ---
-        const form = document.getElementById('inquiryForm');
-        const messageToast = document.getElementById('form-message');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const submitBtn = form.querySelector('button');
-            const originalText = submitBtn.innerText;
-            
-            submitBtn.innerText = "Sending...";
-            submitBtn.style.opacity = "0.7";
-
-            setTimeout(() => {
-                messageToast.classList.add('show');
-                
-                form.reset();
-                submitBtn.innerText = originalText;
-                submitBtn.style.opacity = "1";
-
-                setTimeout(() => {
-                    messageToast.classList.remove('show');
-                }, 4000);
-            }, 1500);
-        });
+        // --- 4. Form Handling (Ye nakli form submission hai) 
+        
 
     </script>
 </body>
 
 </html>
+
 
